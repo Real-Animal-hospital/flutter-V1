@@ -1,4 +1,4 @@
-import 'package:animal_hospital/presentation/main/main_screen.dart';
+import 'package:animal_hospital/presentation/cupertino/main/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {
