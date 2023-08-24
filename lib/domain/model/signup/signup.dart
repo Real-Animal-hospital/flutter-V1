@@ -8,7 +8,7 @@ part 'signup.g.dart';
 @freezed
 class Signup with _$Signup {
   const factory Signup({
-    required String userId,
+    @JsonKey(name: 'user_id') required String userId,
     required String password,
     required String name,
     required String number,
