@@ -8,7 +8,7 @@ part 'login_request.g.dart';
 @freezed
 class LoginRequest with _$LoginRequest {
   const factory LoginRequest({
-    required String userId,
+    @JsonKey(name: 'user_id') required String userId,
     required String password,
   }) = _LoginRequest;
 
