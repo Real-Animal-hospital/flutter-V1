@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import 'package:animal_hospital/domain/model/user/user.dart';
-
 import 'package:http/http.dart' as http;
 
-class UserApi {
-  Future<List<User>> getUsers() async {
-    final response =
-        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
+import 'package:animal_hospital/domain/model/login/login_request.dart';
 
-    Iterable jsonArray = jsonDecode(response.body);
+class LoginApi {
+  static const baseURL = 'https://34.168.248.106/swagger/?format=openapi';
 
-    return jsonArray.map((e) => User.fromJson(e)).toList();
+  Future<LoginRequest> getLogin() async {
+    final response = await http
+        .get(Uri.parse('$baseURL#/definitions/LoginRequestLoginRequest'));
+
+    return LoginRequest.fromJson(jsonDecode(response.body));
   }
 }
