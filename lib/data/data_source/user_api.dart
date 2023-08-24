@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:animal_hospital/domain/model/signup_user/user.dart';
+import 'package:animal_hospital/domain/model/get_user/user.dart';
 import 'package:http/http.dart' as http;
 
 class UserApi {
