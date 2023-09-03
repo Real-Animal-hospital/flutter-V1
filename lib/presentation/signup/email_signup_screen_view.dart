@@ -15,6 +15,7 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Spacer(flex: 2),
             Text(
               '간편히 가입하고',
               style: TextStyle(
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 45),
             Container(
               width: 320,
               child: TextField(
@@ -55,7 +56,7 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 10),
             Container(
               width: 320,
               child: TextField(
@@ -85,11 +86,8 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                 ),
               ),
             ),
-            // 간격 조절용 컨테이너
-            Container(
-              height: 100.0,
-              width: 100.0,
-            ),
+            // 간격 조절용
+            Spacer(flex: 1),
             Container(
               width: 280,
               height: 50,
@@ -118,6 +116,18 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                 ),
               ),
             ),
+            Expanded(child: SizedBox(height: 50,)),
+            Container(
+                child: Text(
+                  "@2023 Dogdoc All copyrights reserved",
+                  style: TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w400, // 오타 수정
+                  ),
+                )
+            ),
+            Expanded(child: SizedBox(height: 30,)),
+            Container(),
           ],
         ),
       ),
