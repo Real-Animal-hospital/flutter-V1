@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     '이메일로 회원가입',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF414941),
+                      color: Color(0xFF43D9C0),
                     ),
                   ),
                 ),
@@ -131,12 +132,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      // 구글 로그인 클릭 시 실행할 동작
+                      // 카카오톡 아이콘 클릭 이벤트 처리
+                      print('카카오톡 아이콘을 클릭했습니다.');
                     },
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage:
-                          AssetImage('assets/google_logo.png'), // 이미지 주소 넣기
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/kakao.svg', // 첫 번째 SVG 파일 경로
+                          width: 65,
+                          height: 65,
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -147,12 +154,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   // 아이콘 사이 간격 조절
                   InkWell(
                     onTap: () {
-                      // 페이스북 로그인 클릭 시 실행할 동작
+                      // 페이스북 아이콘 클릭 이벤트 처리
+                      print('페이스북 아이콘을 클릭했습니다.');
                     },
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage:
-                          AssetImage('assets/facebook_logo.png'), // 이미지 주소 넣기
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/facebook_back.svg', // 첫 번째 SVG 파일 경로
+                          width: 65,
+                          height: 65,
+                        ),
+                        SvgPicture.asset(
+                          'assets/facebook_icon.svg', // 두 번째 SVG 파일 경로
+                          width: 50,
+                          height: 50,
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -162,18 +180,29 @@ class _LoginScreenState extends State<LoginScreen> {
                           : 40),
                   InkWell(
                     onTap: () {
-                      // 구글 로그인 클릭 시 실행할 동작
+                      // 구글 아이콘 클릭 이벤트 처리
+                      print('구글 아이콘을 클릭했습니다.');
                     },
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage:
-                          AssetImage('assets/google_logo.png'), // 이미지 주소 넣기
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/google_back.svg', // 첫 번째 SVG 파일 경로
+                          width: 65,
+                          height: 65,
+                        ),
+                        SvgPicture.asset(
+                          'assets/google_icon.svg', // 두 번째 SVG 파일 경로
+                          width: 35,
+                          height: 35,
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 35),
+            SizedBox(height: 30),
             Container(
               width: 280,
               height: 50,
