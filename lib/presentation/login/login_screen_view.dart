@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF3F484A),
+                    color: Color(0xFF323232),
                   ),
                   // 오른쪽에 아이콘 추가
                   contentPadding:
@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
                     borderSide: BorderSide(
-                      color: Color(0xFF3F484A),
+                      color: Color(0xFF323232),
                     ),
                   ),
                 ),
@@ -79,14 +79,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF3F484A),
+                    color: Color(0xFF323232),
                   ),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
                     borderSide: BorderSide(
-                      color: Color(0xFF3F484A),
+                      color: Color(0xFF323232),
                     ),
                   ),
                 ),
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     '아이디/비밀번호 찾기',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF414941),
+                      color: Color(0xFF323232),
                     ),
                   ),
                 ),
@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     '이메일로 회원가입',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF43D9C0),
+                      color: Color(0xFF323232),
                     ),
                   ),
                 ),

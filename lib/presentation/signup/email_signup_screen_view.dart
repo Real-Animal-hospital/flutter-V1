@@ -21,6 +21,7 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
+                color: Color(0xFF000000),
               ),
             ),
             Text(
@@ -28,6 +29,7 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
+                color: Color(0xFF000000),
               ),
             ),
             SizedBox(height: 45),
@@ -40,17 +42,17 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF3F484A),
+                    color: Color(0xFF323232),
                   ),
                   suffixIcon:
-                      Icon(Icons.email_outlined, color: Color(0xFF3F484A)),
+                      Icon(Icons.email_outlined, color: Color(0xFF323232)),
                   // 오른쪽에 아이콘 추가
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
                     borderSide: BorderSide(
-                      color: Color(0xFF3F484A),
+                      color: Color(0xFF323232),
                     ),
                   ),
                 ),
@@ -66,13 +68,13 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF3F484A),
+                    color: Color(0xFF323232),
                   ),
                   helperText: '영문, 숫자 포함 8자 이상',
                   // 아래에 나타날 안내 메시지
                   helperStyle: TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF3F484A),
+                    color: Color(0xFF323232),
                   ),
                   // 오른쪽에 아이콘 추가
                   contentPadding:
@@ -80,7 +82,7 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
                     borderSide: BorderSide(
-                      color: Color(0xFF3F484A),
+                      color: Color(0xFF323232),
                     ),
                   ),
                 ),
