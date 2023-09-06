@@ -140,8 +140,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         SvgPicture.asset(
                           'assets/kakao.svg', // 첫 번째 SVG 파일 경로
-                          width: 65,
-                          height: 65,
+                          width: 53,
+                          height: 53,
                         ),
                       ],
                     ),
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: MediaQuery.of(context).orientation ==
                               Orientation.portrait
                           ? 20
-                          : 40),
+                          : 20),
                   // 아이콘 사이 간격 조절
                   InkWell(
                     onTap: () {
@@ -162,13 +162,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         SvgPicture.asset(
                           'assets/facebook_back.svg', // 첫 번째 SVG 파일 경로
-                          width: 65,
-                          height: 65,
+                          width: 53,
+                          height: 53,
                         ),
                         SvgPicture.asset(
                           'assets/facebook_icon.svg', // 두 번째 SVG 파일 경로
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                         ),
                       ],
                     ),
@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: MediaQuery.of(context).orientation ==
                               Orientation.portrait
                           ? 20
-                          : 40),
+                          : 20),
                   InkWell(
                     onTap: () {
                       // 구글 아이콘 클릭 이벤트 처리
@@ -188,13 +188,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         SvgPicture.asset(
                           'assets/google_back.svg', // 첫 번째 SVG 파일 경로
-                          width: 65,
-                          height: 65,
+                          width: 53,
+                          height: 53,
                         ),
                         SvgPicture.asset(
                           'assets/google_icon.svg', // 두 번째 SVG 파일 경로
-                          width: 35,
-                          height: 35,
+                          width: 27,
+                          height: 27,
                         ),
                       ],
                     ),
@@ -208,8 +208,8 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
-                border: Border.all(color: Colors.blueAccent),
-                color: Color(0xFF608BFF),
+                border: Border.all(color: Color(0xFF43D9C0)),
+                color: Color(0xFF43D9C0),
               ),
               child: ElevatedButton(
                 onPressed: () {
@@ -223,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 child: Text(
-                  '로그인',
+                  '다음으로 넘어가기',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
