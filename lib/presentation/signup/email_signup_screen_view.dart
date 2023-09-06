@@ -93,8 +93,8 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
-                border: Border.all(color: Colors.blueAccent),
-                color: Color(0xFF608BFF),
+                border: Border.all(color: Color(0xFF43D9C0)),
+                color: Color(0xFF43D9C0),
               ),
               child: ElevatedButton(
                 onPressed: () {
