@@ -37,7 +37,7 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
               width: 320,
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: '이메일 주소',
+                  //hintText: '이메일 주소',
                   // 텍스트 필드 안에 나타날 placeholder 텍스트
                   hintStyle: TextStyle(
                     fontSize: 14,
@@ -55,6 +55,18 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                       color: Color(0xFF323232),
                     ),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: BorderSide(
+                      color: Color(0xFF43D9C0),
+                    ),
+                  ),
+                  labelText: '이메일 주소',
+                  labelStyle: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF323232),
+                  ),
                 ),
               ),
             ),
@@ -63,7 +75,7 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
               width: 320,
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: '비밀번호',
+                  //hintText: '비밀번호',
                   // 텍스트 필드 안에 나타날 placeholder 텍스트
                   hintStyle: TextStyle(
                     fontSize: 14,
@@ -84,6 +96,18 @@ class _LoginScreenState extends State<EmailSignUpScreen> {
                     borderSide: BorderSide(
                       color: Color(0xFF323232),
                     ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: BorderSide(
+                      color: Color(0xFF43D9C0),
+                    ),
+                  ),
+                  labelText: '비밀번호',
+                  labelStyle: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF323232),
                   ),
                 ),
               ),
