@@ -10,6 +10,27 @@ class EmailSignUpScreen extends StatefulWidget {
 }
 
 class _EmailSignUpScreen extends State<EmailSignUpScreen> {
+  FocusNode _emailFocusNode = FocusNode();
+  FocusNode _passwordFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _emailFocusNode.addListener(() {
+      setState(() {});
+    });
+    _passwordFocusNode.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // 가로 회전 안되게 하는 코드
@@ -40,6 +61,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
             Container(
               width: 320,
               child: TextField(
+                focusNode: _emailFocusNode,
                 decoration: InputDecoration(
                   //hintText: '이메일 주소',
                   // 텍스트 필드 안에 나타날 placeholder 텍스트
@@ -84,7 +106,9 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                   labelStyle: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF323232),
+                    color: _emailFocusNode.hasFocus
+                        ? Color(0xFF43D9C0)
+                        : Color(0xFF323232),
                   ),
                 ),
               ),
@@ -93,6 +117,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
             Container(
               width: 320,
               child: TextField(
+                focusNode: _passwordFocusNode,
                 decoration: InputDecoration(
                   //hintText: '비밀번호',
                   // 텍스트 필드 안에 나타날 placeholder 텍스트
@@ -125,7 +150,9 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                   labelStyle: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF323232),
+                    color: _passwordFocusNode.hasFocus
+                        ? Color(0xFF43D9C0)
+                        : Color(0xFF323232),
                   ),
                 ),
               ),
