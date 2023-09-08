@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SignUpDoneScreen extends StatefulWidget {
   const SignUpDoneScreen({Key? key}) : super(key: key);
@@ -10,6 +11,8 @@ class SignUpDoneScreen extends StatefulWidget {
 class _SignUpDoneScreen extends State<SignUpDoneScreen> {
   @override
   Widget build(BuildContext context) {
+    // 가로 회전 안되게 하는 코드
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
       body: Center(
         child: Column(
