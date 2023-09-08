@@ -1,3 +1,4 @@
+import 'package:animal_hospital/presentation/components/custom_showbottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -47,8 +48,23 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF323232),
                   ),
-                  suffixIcon:
-                      Icon(Icons.email_outlined, color: Color(0xFF323232)),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      showReusableModalBottomSheet(
+                        context: context,
+                        child: CustomBottomSheet(
+                          title: '입력한 이메일 주소로',
+                          content: '인증 메일이 발송 되었습니다.',
+                          onButtonPressed: () {
+                            Navigator.pop(context);
+                            print('이메일 아이콘 눌림');
+                          },
+                          buttonContent: '확인',
+                        ),
+                      );
+                    },
+                    child: Icon(Icons.email_outlined, color: Color(0xFF323232)),
+                  ),
                   // 오른쪽에 아이콘 추가
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 15),
@@ -91,7 +107,6 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                     fontSize: 12,
                     color: Color(0xFF323232),
                   ),
-                  // 오른쪽에 아이콘 추가
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   border: OutlineInputBorder(
@@ -145,17 +160,22 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                 ),
               ),
             ),
-            Expanded(child: SizedBox(height: 50,)),
+            Expanded(
+                child: SizedBox(
+              height: 50,
+            )),
             Container(
                 child: Text(
-                  "@2023 Dogdoc All copyrights reserved",
-                  style: TextStyle(
-                    fontSize: 13.5,
-                    fontWeight: FontWeight.w400, // 오타 수정
-                  ),
-                )
-            ),
-            Expanded(child: SizedBox(height: 30,)),
+              "@2023 Dogdoc All copyrights reserved",
+              style: TextStyle(
+                fontSize: 13.5,
+                fontWeight: FontWeight.w400, // 오타 수정
+              ),
+            )),
+            Expanded(
+                child: SizedBox(
+              height: 30,
+            )),
             Container(),
           ],
         ),
