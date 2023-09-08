@@ -4,10 +4,10 @@ class EmailSignUpScreen extends StatefulWidget {
   const EmailSignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<EmailSignUpScreen> createState() => _LoginScreenState();
+  State<EmailSignUpScreen> createState() => _EmailSignUpScreen();
 }
 
-class _LoginScreenState extends State<EmailSignUpScreen> {
+class _EmailSignUpScreen extends State<EmailSignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
