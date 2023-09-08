@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +14,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 가로 회전이 안되게 하는 코드
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
       body: Center(
         child: Column(

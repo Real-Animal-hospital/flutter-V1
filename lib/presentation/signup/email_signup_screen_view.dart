@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class EmailSignUpScreen extends StatefulWidget {
   const EmailSignUpScreen({Key? key}) : super(key: key);
@@ -10,6 +11,8 @@ class EmailSignUpScreen extends StatefulWidget {
 class _EmailSignUpScreen extends State<EmailSignUpScreen> {
   @override
   Widget build(BuildContext context) {
+    // 가로 회전 안되게 하는 코드
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
       body: Center(
         child: Column(
