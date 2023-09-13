@@ -12,6 +12,8 @@ class User with _$User {
     required String name,
     required String number,
     required String password,
+    required int is_email_verified,
+
   }) = _User;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
