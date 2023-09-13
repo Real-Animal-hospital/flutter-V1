@@ -8,7 +8,6 @@ class FoundIdPassword extends StatefulWidget {
   State<FoundIdPassword> createState() => _FoundIdPasswordState();
 }
 
-// TODO: 아이디/비밀번호 찾기 간격 조절
 class _FoundIdPasswordState extends State<FoundIdPassword> {
   bool isPasswordRecovery = false;
 
@@ -93,7 +92,7 @@ class _FoundIdPasswordState extends State<FoundIdPassword> {
                   TextField(
                     decoration: InputDecoration(
                       hintText:
-                          isPasswordRecovery ? '이름을 입력해주세요' : '이메일을 입력해주세요',
+                          isPasswordRecovery ? '이메일을 입력해주세요' : '이름을 입력해주세요',
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -105,11 +104,18 @@ class _FoundIdPasswordState extends State<FoundIdPassword> {
                         border: OutlineInputBorder(),
                       ),
                     ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text('숫자만 입력해주세요'),
+                      ),
+                    )
                   ]
                 ],
               ),
             ),
-            SizedBox(height: 100),
+            Flexible(child: SizedBox(height: 280)), // 간격 조절
             Container(
               width: 280,
               height: 50,
