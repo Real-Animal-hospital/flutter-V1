@@ -1,3 +1,4 @@
+import 'package:animal_hospital/data/data_source/post_api/send_verification_email_api.dart';
 import 'package:animal_hospital/presentation/components/custom_showbottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,12 @@ class EmailSignUpScreen extends StatefulWidget {
 class _EmailSignUpScreen extends State<EmailSignUpScreen> {
   FocusNode _emailFocusNode = FocusNode();
   FocusNode _passwordFocusNode = FocusNode();
+
+  final SendVerificationEmail sendEmailPost = SendVerificationEmail();
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController(); // 비밀번호 입력값 관리를 위한 컨트롤러 추가
+
 
   @override
   void initState() {
@@ -71,7 +78,8 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                     color: Color(0xFF323232),
                   ),
                   suffixIcon: GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                    //  bool isEmailVerified = await sendEmailPost.sendEmail(_emailController);
                       showReusableModalBottomSheet(
                         context: context,
                         child: CustomBottomSheet(
