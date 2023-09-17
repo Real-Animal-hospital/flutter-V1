@@ -17,8 +17,8 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
   final SendVerificationEmail sendEmailPost = SendVerificationEmail();
 
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController(); // 비밀번호 입력값 관리를 위한 컨트롤러 추가
-
+  final _passwordController =
+      TextEditingController(); // 비밀번호 입력값 관리를 위한 컨트롤러 추가
 
   @override
   void initState() {
@@ -68,6 +68,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
             Container(
               width: 320,
               child: TextField(
+                controller: _emailController,
                 focusNode: _emailFocusNode,
                 decoration: InputDecoration(
                   //hintText: '이메일 주소',
@@ -79,7 +80,13 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                   ),
                   suffixIcon: GestureDetector(
                     onTap: () async {
-                    //  bool isEmailVerified = await sendEmailPost.sendEmail(_emailController);
+                      await sendEmailPost.sendEmail(
+                        _emailController.text,
+                        _passwordController.text, // 비밀번호 추가
+                      );
+                      print('이메일화면에서 보내는 데이터${_emailController.text},'
+                          '비밀번호 :'
+                          '${_passwordController.text}');
                       showReusableModalBottomSheet(
                         context: context,
                         child: CustomBottomSheet(
@@ -125,6 +132,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
             Container(
               width: 320,
               child: TextField(
+                controller: _passwordController,
                 focusNode: _passwordFocusNode,
                 decoration: InputDecoration(
                   //hintText: '비밀번호',
