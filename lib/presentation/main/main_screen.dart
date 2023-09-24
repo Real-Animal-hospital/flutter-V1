@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:animal_hospital/presentation/components/bottom_navigation_widget.dart';
+import 'package:animal_hospital/components/bottom_navigation_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
