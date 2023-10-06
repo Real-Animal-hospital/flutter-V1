@@ -1,3 +1,4 @@
+import 'package:animal_hospital/login/presentation/found_id_passoword_screen_view.dart';
 import 'package:animal_hospital/login/presentation/login_screen_view.dart';
 import 'package:animal_hospital/siginup/presentation/email_signup_screen_view.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,12 @@ final GoRouter router = GoRouter(
       path: '/emailsignup',
       builder: (BuildContext context, GoRouterState state) {
         return const EmailSignUpScreen();
+      },
+    ),
+    GoRoute(
+      path: '/foundid',
+      builder: (BuildContext context, GoRouterState state) {
+        return const FoundIdPassword();
       },
     ),
   ],
