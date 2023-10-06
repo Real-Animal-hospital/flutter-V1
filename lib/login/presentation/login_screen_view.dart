@@ -127,6 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 InkWell(
                   onTap: () {
                     // 아이디 비밀번호 찾기 클릭 시 실행할 동작
+                    context.push('/foundid');
                   },
                   child: Text(
                     '아이디/비밀번호 찾기',
