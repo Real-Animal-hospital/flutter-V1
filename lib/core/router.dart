@@ -1,6 +1,6 @@
-import 'package:animal_hospital/login/presentation/found_id_passoword_screen_view.dart';
-import 'package:animal_hospital/login/presentation/login_screen_view.dart';
-import 'package:animal_hospital/siginup/presentation/email_signup_screen_view.dart';
+import 'package:animal_hospital/auth/login/presentation/found_id_passoword_screen_view.dart';
+import 'package:animal_hospital/auth/login/presentation/login_screen_view.dart';
+import 'package:animal_hospital/auth/siginup/presentation/email_signup_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
