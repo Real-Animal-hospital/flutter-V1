@@ -56,7 +56,7 @@ class CustomBottomSheet extends StatelessWidget {
                       Navigator.pop(context);
                     },
                 style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFF43D9C0), // 배경색을 투명하게 설정
+                  backgroundColor: const Color(0xFF43D9C0), // 배경색을 투명하게 설정
                   elevation: 0, // 그림자 효과 없애기
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

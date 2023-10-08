@@ -201,7 +201,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                   // 회원가입 버튼이 눌렸을 때 실행할 동작
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.transparent, // 배경색을 투명하게 설정
+                  backgroundColor: Colors.transparent, // 배경색을 투명하게 설정
                   elevation: 0, // 그림자 효과 없애기
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

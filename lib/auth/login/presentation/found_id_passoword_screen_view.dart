@@ -232,7 +232,7 @@ class _FoundIdPasswordState extends State<FoundIdPassword> {
               child: ElevatedButton(
                 onPressed: () => checkAndShowModal(context),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.transparent,
+                  backgroundColor: Colors.transparent,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
