@@ -90,13 +90,26 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                       showReusableModalBottomSheet(
                         context: context,
                         child: CustomBottomSheet(
-                          title: '입력한 이메일 주소로',
-                          content: '인증 메일이 발송 되었습니다.',
-                          onButtonPressed: () {
-                            Navigator.pop(context);
-                            print('이메일 아이콘 눌림');
-                          },
-                          buttonContent: '확인',
+                            title: '입력한 이메일 주소로',
+                            content: Text(
+                              '인증 메일이 발송 되었습니다.',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                            onButtonPressed: () {
+                              Navigator.pop(context);
+                              print('이메일 아이콘 눌림');
+                            },
+                            buttonContent: Text(
+                              '확인',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                         ),
                       );
                     },
