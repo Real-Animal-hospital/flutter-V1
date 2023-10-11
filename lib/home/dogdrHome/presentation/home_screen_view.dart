@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DogDrHomeScreen extends StatefulWidget {
   const DogDrHomeScreen({super.key});
@@ -135,7 +136,9 @@ class _DogDrHomeScreenState extends State<DogDrHomeScreen> {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push('/news');
+                    },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
