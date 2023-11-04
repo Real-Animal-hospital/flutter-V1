@@ -1,7 +1,9 @@
+import 'package:animal_hospital/auth/siginup/data/data_source/get_api/get_email_verification_status.dart';
 import 'package:animal_hospital/auth/siginup/data/data_source/post_api/send_verification_email_api.dart';
 import 'package:animal_hospital/components/custom_showbottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class EmailSignUpScreen extends StatefulWidget {
   const EmailSignUpScreen({Key? key}) : super(key: key);
@@ -11,8 +13,24 @@ class EmailSignUpScreen extends StatefulWidget {
 }
 
 class _EmailSignUpScreen extends State<EmailSignUpScreen> {
-  FocusNode _emailFocusNode = FocusNode();
-  FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
+  bool _isPasswordVisible = false;
+
+  // 입력값 유효성 검사
+  bool _isInputValid() {
+    return _emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty;
+  }
+
+  // 이메일 유효성 검사
+  bool _isEmailValid(String email) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern as String);
+    return regex.hasMatch(email);
+  }
 
   final SendVerificationEmail sendEmailPost = SendVerificationEmail();
 
@@ -47,8 +65,8 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(flex: 2),
-            Text(
+            const Spacer(flex: 2),
+            const Text(
               '간편히 가입하고',
               style: TextStyle(
                 fontSize: 16,
@@ -56,7 +74,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                 color: Color(0xFF000000),
               ),
             ),
-            Text(
+            const Text(
               '다양한 서비스를 이용하세요',
               style: TextStyle(
                 fontSize: 16,
@@ -64,7 +82,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                 color: Color(0xFF000000),
               ),
             ),
-            SizedBox(height: 45),
+            const SizedBox(height: 45),
             Container(
               width: 320,
               child: TextField(
@@ -73,25 +91,27 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                 decoration: InputDecoration(
                   //hintText: '이메일 주소',
                   // 텍스트 필드 안에 나타날 placeholder 텍스트
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF323232),
                   ),
                   suffixIcon: GestureDetector(
                     onTap: () async {
-                      await sendEmailPost.sendEmail(
-                        _emailController.text,
-                        _passwordController.text, // 비밀번호 추가
-                      );
-                      print('이메일화면에서 보내는 데이터${_emailController.text},'
-                          '비밀번호 :'
-                          '${_passwordController.text}');
-                      showReusableModalBottomSheet(
-                        context: context,
-                        child: CustomBottomSheet(
+                      if (_isInputValid() &&
+                          _isEmailValid(_emailController.text)) {
+                        await sendEmailPost.sendEmail(
+                          _emailController.text,
+                          _passwordController.text, // 비밀번호 추가
+                        );
+                        print('이메일화면에서 보내는 데이터${_emailController.text},'
+                            '비밀번호 :'
+                            '${_passwordController.text}');
+                        showReusableModalBottomSheet(
+                          context: context,
+                          child: CustomBottomSheet(
                             title: '입력한 이메일 주소로',
-                            content: Text(
+                            content: const Text(
                               '인증 메일이 발송 되었습니다.',
                               style: TextStyle(
                                 fontSize: 16,
@@ -103,30 +123,40 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                               Navigator.pop(context);
                               print('이메일 아이콘 눌림');
                             },
-                            buttonContent: Text(
+                            buttonContent: const Text(
                               '확인',
                               style: TextStyle(
+                                color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                        ),
-                      );
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('이메일과 비밀번호를 입력해주세요.'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      }
                     },
-                    child: Icon(Icons.email_outlined, color: Color(0xFF323232)),
+                    child: const Icon(Icons.email_outlined,
+                        color: Color(0xFF323232)),
                   ),
                   // 오른쪽에 아이콘 추가
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF323232),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF43D9C0),
                     ),
                   ),
@@ -135,43 +165,58 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: _emailFocusNode.hasFocus
-                        ? Color(0xFF43D9C0)
-                        : Color(0xFF323232),
+                        ? const Color(0xFF43D9C0)
+                        : const Color(0xFF323232),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
               width: 320,
               child: TextField(
                 controller: _passwordController,
                 focusNode: _passwordFocusNode,
+                obscureText: !_isPasswordVisible,
                 decoration: InputDecoration(
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // 비밀번호 보이기/감추기 기능
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                    child: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: const Color(0xFF323232),
+                    ),
+                  ),
                   //hintText: '비밀번호',
                   // 텍스트 필드 안에 나타날 placeholder 텍스트
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF323232),
                   ),
                   helperText: '영문, 숫자 포함 8자 이상',
                   // 아래에 나타날 안내 메시지
-                  helperStyle: TextStyle(
+                  helperStyle: const TextStyle(
                     fontSize: 12,
                     color: Color(0xFF323232),
                   ),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF323232),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF43D9C0),
                     ),
                   ),
@@ -180,25 +225,47 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: _passwordFocusNode.hasFocus
-                        ? Color(0xFF43D9C0)
-                        : Color(0xFF323232),
+                        ? const Color(0xFF43D9C0)
+                        : const Color(0xFF323232),
                   ),
                 ),
               ),
             ),
             // 간격 조절용
-            Spacer(flex: 1),
+            const Spacer(flex: 1),
             Container(
               width: 280,
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
-                border: Border.all(color: Color(0xFF43D9C0)),
-                color: Color(0xFF43D9C0),
+                border: Border.all(color: const Color(0xFF43D9C0)),
+                color: const Color(0xFF43D9C0),
               ),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   // 회원가입 버튼이 눌렸을 때 실행할 동작
+                  if (_isInputValid() && _isEmailValid(_emailController.text)) {
+                    bool isVerified =
+                        await getEmailVerificationStatus(_emailController.text);
+
+                    if (isVerified) {
+                      context.push('/signupdone');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('이메일 인증을 완료해주세요.'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('이메일과 비밀번호를 입력해주세요.'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent, // 배경색을 투명하게 설정
@@ -207,7 +274,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   '이메일로 회원가입',
                   style: TextStyle(
                     fontSize: 16,
@@ -217,19 +284,19 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
                 ),
               ),
             ),
-            Expanded(
+            const Expanded(
                 child: SizedBox(
               height: 50,
             )),
             Container(
-                child: Text(
+                child: const Text(
               "@2023 Dogdoc All copyrights reserved",
               style: TextStyle(
                 fontSize: 13.5,
                 fontWeight: FontWeight.w400, // 오타 수정
               ),
             )),
-            Expanded(
+            const Expanded(
                 child: SizedBox(
               height: 30,
             )),
@@ -242,7 +309,7 @@ class _EmailSignUpScreen extends State<EmailSignUpScreen> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: EmailSignUpScreen(),
   ));
 }
