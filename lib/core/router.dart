@@ -1,6 +1,7 @@
 import 'package:animal_hospital/auth/login/presentation/found_id_passoword_screen_view.dart';
 import 'package:animal_hospital/auth/login/presentation/login_screen_view.dart';
 import 'package:animal_hospital/auth/siginup/presentation/email_signup_screen_view.dart';
+import 'package:animal_hospital/auth/siginup/presentation/signup_done_screen_view.dart';
 import 'package:animal_hospital/components/bottom_navigation_widget.dart';
 import 'package:animal_hospital/home/dogdrNews/presentation/news_screen_view.dart';
 import 'package:animal_hospital/intro_view/introduce/presentation/introduce_screen_view.dart';
@@ -20,6 +21,12 @@ final GoRouter router = GoRouter(
       path: '/emailsignup',
       builder: (BuildContext context, GoRouterState state) {
         return const EmailSignUpScreen();
+      },
+    ),
+    GoRoute(
+      path: '/signupdone',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SignUpDoneScreen();
       },
     ),
     GoRoute(
