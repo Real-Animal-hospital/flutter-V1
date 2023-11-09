@@ -1,4 +1,4 @@
-import 'package:animal_hospital/components/bottom_navigation_widget.dart';
+import 'package:animal_hospital/auth/login/data/post_api/login_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,6 +13,39 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _showPassword = false;
+  final _emailController = TextEditingController(); // 이메일 컨트롤러 추가
+  final _passwordController = TextEditingController(); // 패스워드 컨트롤러 추가
+
+  @override
+  void dispose() {
+    // 컨트롤러 해제
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<bool> _login() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    // 이메일과 패스워드가 입력되었는지 확인
+    if (email.isNotEmpty && password.isNotEmpty) {
+      try {
+        final loginService = LoginService();
+        bool loginSuccess = await loginService.sendEmail(email, password);
+        // loginSuccess 값을 반환
+        return loginSuccess;
+      } catch (e) {
+        // 로그인 실패 시 사용자에게 알림
+        print('로그인 실패: 예외 발생 - $e');
+        return false; // 예외가 발생했을 때 false를 반환
+      }
+    } else {
+      context.push('/home');
+      print('비회원');
+      return true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               width: 320,
               child: TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   // hintText: '이메일 주소',
                   // 텍스트 필드 안에 나타날 placeholder 텍스트
@@ -79,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 320,
               child: TextField(
                 obscureText: !_showPassword, // 비밀번호 가리기
+                controller: _passwordController,
                 decoration: InputDecoration(
                   //hintText: '비밀번호',
                   suffixIcon: InkWell(
@@ -141,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(width: 90),
                 InkWell(
                   onTap: () {
-                   context.push('/emailsignup');
+                    context.push('/emailsignup');
                   },
                   child: const Text(
                     '이메일로 회원가입',
@@ -242,8 +277,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: const Color(0xFF43D9C0),
               ),
               child: ElevatedButton(
-                onPressed: () {
-                  // 다음으로 넘어가기 누를 때 액션
+                onPressed: () async {
+                  try {
+                    bool loginSuccess = await _login();
+                    if (!loginSuccess) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('로그인에 실패했습니다. 이메일과 비밀번호를 확인해 주세요.'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    } else {
+                      // 로그인 성공, 다음 화면으로 네비게이트
+                      context.push('/home');
+                    }
+                  } catch (e) {
+                    // 네트워크 오류 등의 예외를 처리하는 부분
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('로그인 중 오류가 발생했습니다: $e'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent, // 배경색을 투명하게 설정
@@ -269,8 +325,8 @@ class _LoginScreenState extends State<LoginScreen> {
             const Text(
               "@2023 Dogdoc All copyrights reserved",
               style: TextStyle(
-            fontSize: 13.5,
-            fontWeight: FontWeight.w400, // 오타 수정
+                fontSize: 13.5,
+                fontWeight: FontWeight.w400, // 오타 수정
               ),
             ),
             const Expanded(
