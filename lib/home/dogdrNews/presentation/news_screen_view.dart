@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 class NewsScreenView extends StatefulWidget {
   const NewsScreenView({Key? key}) : super(key: key);
@@ -8,121 +11,101 @@ class NewsScreenView extends StatefulWidget {
 }
 
 class _NewsScreenViewState extends State<NewsScreenView> {
+  late final WebViewController _controller;
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0,
-          // 경계선 및 그림자 제거
-          backgroundColor: Colors.white,
-          // 배경색을 하얀색으로 설정
-          titleSpacing: 0.0,
-          leading: Align(
-            alignment: Alignment(0, 0.3),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          title: Text(
-            '독 뉴스',
-            style: TextStyle(
-              color: Color(0xFF323232),
-              fontSize: 22,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        body: ListView.builder(
-          itemCount: 10, // 예시로 10개의 뉴스
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(13.0, 10.0, 13.0, 2.0),
-              child: SizedBox(
-                height: 240,
-                child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Container(
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          width: 1.20,
-                          color: Color(0xFFB5B7B4),
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    child: ListTile(
-                      title: Text('뉴스 제목 $index'),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Positioned(
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 800,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      border: Border.all(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text('뉴스 내용 $index'),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 0,
-                                  right: 20,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.transparent,
-                                      ),
-                                      child: Icon(
-                                        Icons.close,
-                                        size: 24,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            );
+  void initState() {
+    super.initState();
+
+    late final PlatformWebViewControllerCreationParams params;
+
+    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+      params = WebKitWebViewControllerCreationParams(
+        allowsInlineMediaPlayback: true,
+        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
+      );
+    } else {
+      params = const PlatformWebViewControllerCreationParams();
+    }
+
+    final WebViewController controller =
+        WebViewController.fromPlatformCreationParams(params);
+
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            debugPrint('WebView is loading (progress : $progress%)');
+          },
+          onPageStarted: (String url) {
+            debugPrint('Page started loading: $url');
+          },
+          onPageFinished: (String url) {
+            debugPrint('Page finished loading: $url');
+          },
+          onWebResourceError: (WebResourceError error) {
+            debugPrint('''
+        
+        
+          
+                        Page resource error:
+        
+        
+          
+                          code: ${error.errorCode}
+        
+        
+          
+                          description: ${error.description}
+        
+        
+          
+                          errorType: ${error.errorType}
+        
+        
+          
+                          isForMainFrame: ${error.isForMainFrame}
+        
+        
+          
+                    ''');
+          },
+          onNavigationRequest: (NavigationRequest request) {
+            debugPrint('allowing navigation to ${request.url}');
+
+            return NavigationDecision.navigate;
           },
         ),
+      )
+      ..addJavaScriptChannel(
+        'Toaster',
+        onMessageReceived: (JavaScriptMessage message) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message.message)),
+          );
+        },
+      )
+      ..loadRequest(Uri.parse('https://search.naver.com/search.naver?where=news&sm=tab_pge&query=%EB%B0%98%EB%A0%A4%EA%B2%AC&sort=0&photo=0&field=0&pd=0&ds=&de=&cluster_rank=47&mynews=0&office_type=0&office_section_code=0&news_office_checked=&office_category=0&service_area=0&nso=so:r,p:all,a:all&start=1'));
+
+    if (controller.platform is AndroidWebViewController) {
+      AndroidWebViewController.enableDebugging(true);
+
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
+    }
+
+    _controller = controller;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        child: WebViewWidget(controller: _controller),
       ),
     );
   }
-}
-
-void main() {
-  runApp(const NewsScreenView());
 }
