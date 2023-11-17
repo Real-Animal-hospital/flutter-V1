@@ -3,6 +3,7 @@ import 'package:animal_hospital/auth/login/presentation/login_screen_view.dart';
 import 'package:animal_hospital/auth/siginup/presentation/email_signup_screen_view.dart';
 import 'package:animal_hospital/auth/siginup/presentation/signup_done_screen_view.dart';
 import 'package:animal_hospital/components/bottom_navigation_widget.dart';
+import 'package:animal_hospital/home/dogdrNews/presentation/news_main_screen_view.dart';
 import 'package:animal_hospital/home/dogdrNews/presentation/news_screen_view.dart';
 import 'package:animal_hospital/intro_view/introduce/presentation/introduce_screen_view.dart';
 import 'package:animal_hospital/intro_view/splash/presentation/splash_first_screen_view.dart';
@@ -56,7 +57,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/news',
       builder: (BuildContext context, GoRouterState state) {
-        return const NewsScreenView();
+        return NewsPage();
       },
     ),
   ],
