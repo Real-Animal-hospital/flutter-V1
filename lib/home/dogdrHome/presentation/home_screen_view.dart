@@ -137,7 +137,7 @@ class _DogDrHomeScreenState extends State<DogDrHomeScreen> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   TextButton(
                     onPressed: () {
-                      context.push('/news');
+                      context.go('/news');
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
